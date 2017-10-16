@@ -1,0 +1,28 @@
+{
+  "name": "js-parse-markdown-metadata",
+  "version": "1.0.1",
+  "description": "CommonJS module to parse metadata comments out of markdown and return object with 'metadata' and 'markdown' properties.",
+  "main": "index.js",
+  "scripts": {
+    "jasmine": "jasmine",
+    "test": "jasmine JASMINE_CONFIG_PATH=test/unit/jasmine.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryankharris/js-parse-markdown-metadata.git"
+  },
+  "keywords": [
+    "markdown",
+    "metadata",
+    "javascript"
+  ],
+  "author": "Ryan K Harris",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryankharris/js-parse-markdown-metadata/issues"
+  },
+  "homepage": "https://github.com/ryankharris/js-parse-markdown-metadata#readme",
+  "devDependencies": {
+    "jasmine": "^2.8.0"
+  }
+}
