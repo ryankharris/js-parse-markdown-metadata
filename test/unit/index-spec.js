@@ -4,6 +4,38 @@ const mdMeta = require('../../index')
 
 describe('js-parse-markdown-metadata', function () {
 
+  it('should not require spaces between open-tag and meta-annotation', function () {
+    let source = `
+<!--@metakey: value-->
+`
+    let parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+      key: 'value'
+    })
+  })
+
+  it('should allow arbitrary space between open-tag and meta-annotation', function () {
+    let source = `
+<!--         @meta
+key: value-->
+`
+    let parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+      key: 'value'
+    })
+  })
+
+  it('should not allow linebreak between open-tag and meta-annotation', function () {
+    let source = `
+<!--
+@meta
+key: value-->
+`
+    let parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+    })
+  })
+
   it('should parse markdown with 4 metadata headers', function () {
     let source = `
 <!-- @meta
