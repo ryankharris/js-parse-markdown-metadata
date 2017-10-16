@@ -19,7 +19,7 @@ Given markdown source:
 
 Require with:  
 
-    const mdMeta = require('./js-parse-markdown-metadata')
+    const mdMeta = require('js-parse-markdown-metadata')
 
 Calling  
 
