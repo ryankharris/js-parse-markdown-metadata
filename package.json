@@ -1,6 +1,6 @@
 {
   "name": "js-parse-markdown-metadata",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CommonJS module to parse metadata comments out of markdown and return object with 'metadata' and 'markdown' properties.",
   "main": "index.js",
   "scripts": {

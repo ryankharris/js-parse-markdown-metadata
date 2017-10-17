@@ -136,4 +136,40 @@ key3: value3
     })
   })
 
+  it('should work for my README examples', function () {
+    let source = `
+
+<!-- @meta
+title: Here is an example of metadata
+author: your name
+-->
+
+<!-- @meta coolFactor: high -->
+
+# Markdown header
+* a
+* short
+* markdown
+* list
+`
+    let parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+      title: 'Here is an example of metadata',
+      author: 'your name',
+      coolfactor: 'high'
+    })
+
+    source = `<!-- @meta title: some title -->`
+    parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+      title: 'some title'
+    })
+
+    source = `<!-- @meta title: some title: and more -->`
+    parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+      title: 'some title: and more'
+    })
+  })
+
 }) // end describe
