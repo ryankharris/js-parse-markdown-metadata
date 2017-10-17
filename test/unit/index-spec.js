@@ -62,4 +62,78 @@ __woot__
     expect(parsedContent.markdown.length).toBe(29)
   }) // end it
 
+  it('should not choke if a `:` is missing in metadata', function () {
+    let source = `<!--@meta somekey -->`
+    let parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+      somekey: ''
+    })
+  })
+
+  it('should make all metadata keys lowercase, but leave values unchanged', function () {
+    let source = `<!--@meta
+Key1: Value1
+Key2: VALUE2
+KEY3: value3
+-->`
+    let parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+      key1: 'Value1',
+      key2: 'VALUE2',
+      key3: 'value3'
+    })
+  })
+
+  it('should find one key-value pair', function () {
+    // This behavior is expected based on the simple splitting
+    // design of metadata, each key-value pair should be on
+    // a line of it's own in the markdown source
+    let source = `<!--@meta Key1: Value1 Key2: VALUE2 -->`
+    let parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+      key1: 'Value1 Key2: VALUE2'
+    })
+  })
+
+  it('should handle an empty key', function () {
+    let source = `<!--@meta :value -->`
+    let parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({})
+  })
+
+  it('should handle an empty key amidst valid keys', function () {
+    let source = `<!--@meta
+key1: value1
+:value2
+key3: value3
+-->`
+    let parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+      key1: 'value1',
+      key3: 'value3'
+    })
+  })
+
+  it('should handle an empty value', function () {
+    let source = `<!--@meta key: -->`
+    let parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+      key: ''
+    })
+  })
+
+  it('should handle an empty value amidst valid key-values', function () {
+    let source = `<!-- @meta
+key1: value1
+key2:
+key3: value3
+-->`
+    let parsedContent = mdMeta.parse(source)
+    expect(parsedContent.metadata).toEqual({
+      key1: 'value1',
+      key2: '',
+      key3: 'value3'
+    })
+  })
+
 }) // end describe
