@@ -50,8 +50,20 @@ exports.parse = function parse (source) {
     // not concerned with overwriting existing key-values, that is the
     // consumer's concern
     kvPairs.forEach((kv) => {
-      let pair = kv.split(':')
-      metaMap[pair[0].trim().toLowerCase()] = pair[1].trim()
+      let i = kv.indexOf(':')
+      let k = ''
+      let v = ''
+      if (i > -1) {
+        k = kv.slice(0, i)
+        v = kv.slice(i + 1, kv.length)
+
+        // no empty keys allowed
+        if (k) {
+          metaMap[k.trim().toLowerCase()] = v.trim()
+        }
+      } else {
+        metaMap[kv.trim().toLowerCase()] = ''
+      }
     })
     return ''
   } // end cacheIt
