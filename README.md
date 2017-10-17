@@ -32,16 +32,39 @@ Calling
       metadata: {
         title: 'Here is an example of metadata',
         author: 'your name',
-        coolFactor: 'high'
+        coolfactor: 'high'
       },
       markdown: '# Markdown header\n* a\n* short\n* markdown\n* list'
     }
 
-Notice that 'markdown' will simply be non-metadata content as a string.
+Notice that 'markdown' will be non-metadata content as a string.  
 Metadata entries can be split into multiple `<!-- @meta -->` combinations
-within source, where `<!-- @meta` is the opening tag and `-->` is the closing tag. The metadata object takes all metadata entries from source
-and splits them on ':', so entries like `title: some title` will create a
-metadata property named 'title' with value 'some title'.
+within source, where `<!-- @meta` is the opening tag and `-->` is the closing tag.  
+The metadata object takes all metadata entries from source
+and splits them on an initial ':', so entries like:
+
+    <!-- @meta title: some title -->
+
+will produce:
+
+    {title: 'some title'}
+
+An entry like:
+
+    <!-- @meta title: some title: and more -->
+
+will produce:
+
+    {title: 'some title: and more'}
+
+All key-names are made lowercase, i.e.
+
+    <!-- @meta coolFactor: high -->
+
+produces:
+
+    {coolfactor: 'high'}
+
 
 ## Running unit-tests
 `npm t -s`  
