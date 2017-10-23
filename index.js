@@ -41,6 +41,10 @@
 */
 exports.parse = function parse (source) {
 
+  if (typeof source !== 'string') {
+    throw 'Error: source argument must be type string'
+  }
+
   function cacheIt (delim, metaMap, match, g1) {
     let kvPairs = g1
                   .split(delim)

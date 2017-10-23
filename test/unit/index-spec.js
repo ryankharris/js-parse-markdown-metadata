@@ -172,4 +172,10 @@ author: your name
     })
   })
 
+  it('should throw an error if the source argument is not type string', function () {
+    let source = 1
+    let boundParse = mdMeta.parse.bind(null, source)
+    expect(boundParse).toThrow('Error: source argument must be type string')
+  })
+
 }) // end describe
